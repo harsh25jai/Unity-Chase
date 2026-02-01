@@ -57,6 +57,9 @@ namespace Data.Vehicle.Runtime
         public Vector3 currentPosition;
         public Vector3 currentVelocity;
         
+        [Header("Zone State")]
+        public Dictionary<string, float> zoneHealths = new Dictionary<string, float>();
+
         // Stored initial state for reset
         private Vector3 _initialPosition;
         private Quaternion _initialRotation;
@@ -108,6 +111,7 @@ namespace Data.Vehicle.Runtime
         {
             // Reset State
             currentDegradationState = VehicleDegradationState.Operational;
+            zoneHealths.Clear();
 
             currentHealth = maxHealth;
             currentFuel = maxFuel;

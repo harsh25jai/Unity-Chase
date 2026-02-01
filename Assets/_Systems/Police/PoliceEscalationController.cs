@@ -83,6 +83,7 @@ namespace Systems.Police
         public void AddIntensity(float amount)
         {
             if (sessionData == null) return;
+            if (sessionData.currentSessionState == SessionState.Ended) return;
 
             float scaledAmount = amount * _currentEscalationMultiplier;
             sessionData.SetThreatLevel(sessionData.globalThreatLevel + scaledAmount);

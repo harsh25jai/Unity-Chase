@@ -8,6 +8,7 @@ namespace Systems.World
     {
         [Header("Backend Data")]
         public WorldState worldState;
+        public Data.Session.Runtime.SessionRuntimeData sessionData;
 
         [Header("Settings")]
         [Tooltip("Simulated speed if no physical player reference is tracking distance")]
@@ -27,6 +28,10 @@ namespace Systems.World
             {
                 worldState = FindFirstObjectByType<WorldState>();
             }
+            if (sessionData == null)
+            {
+                sessionData = FindFirstObjectByType<Data.Session.Runtime.SessionRuntimeData>();
+            }
 
             // Find something to track (Player or Vehicle)
             var player = GameObject.FindGameObjectWithTag("Player");
@@ -36,6 +41,7 @@ namespace Systems.World
         private void Update()
         {
             if (worldState == null) return;
+            if (sessionData != null && sessionData.currentSessionState != Data.Session.Runtime.SessionState.Active) return;
 
             // Update Distance
             if (autoIncrementDistance)

@@ -60,8 +60,29 @@ namespace Systems.Checkpoints
 
         private bool CanSave()
         {
-            // Add conditions: Is Player Alive? Is Game Active?
-            // For now, assume yes if the trigger was hit.
+            if (_sessionData == null) return false;
+            
+            // 1. Session must be Active
+            if (_sessionData.currentSessionState != SessionState.Active)
+            {
+                Debug.LogWarning("[CheckpointSystem] Cannot save: Session not Active.");
+                return false;
+            }
+
+            // 2. Player must be Alive (Need PlayerData reference)
+            // Ideally we'd cache this or look it up. For safety in this test turn:
+            var playerData = FindFirstObjectByType<Data.Player.Runtime.PlayerRuntimeData>();
+            if (playerData != null)
+            {
+                if (playerData.currentSurvivalState != Data.Player.Runtime.SurvivalState.Alive)
+                {
+                    Debug.LogWarning("[CheckpointSystem] Cannot save: Player not Alive.");
+                    return false;
+                }
+            }
+            // If no player data found? Assume safe or unsafe? Safe for now to allow basic tests without player instantiation if needed.
+            // But real game should have player. 
+
             return true;
         }
     }

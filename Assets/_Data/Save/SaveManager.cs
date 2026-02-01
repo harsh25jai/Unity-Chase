@@ -12,6 +12,10 @@ namespace Data.Save.Manager
     public class SaveManager : MonoBehaviour
     {
         public static SaveManager Instance { get; private set; }
+        
+        // Events
+        public event System.Action OnSaveCompleted;
+        public event System.Action<string> OnSaveFailed;
 
         [Header("Settings")]
         public string saveFileName = "gamesave.json";
@@ -127,10 +131,12 @@ namespace Data.Save.Manager
             {
                 File.WriteAllText(path, json);
                 Debug.Log($"[SaveManager] Game saved to: {path}");
+                OnSaveCompleted?.Invoke();
             }
             catch (System.Exception e)
             {
                 Debug.LogError($"[SaveManager] Failed to write save file: {e.Message}");
+                OnSaveFailed?.Invoke(e.Message);
             }
         }
 

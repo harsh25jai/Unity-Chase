@@ -53,6 +53,38 @@ namespace Systems.Vehicle
             EvaluateState();
         }
 
+        public void ApplyZoneDamage(string zoneID, float amount)
+        {
+            if (vehicleRuntimeData.currentDegradationState == VehicleDegradationState.Disabled) return;
+            
+            // 1. Update Zone Health
+            if (vehicleRuntimeData.zoneHealths.ContainsKey(zoneID))
+            {
+                vehicleRuntimeData.zoneHealths[zoneID] -= amount;
+            }
+            else
+            {
+                vehicleRuntimeData.zoneHealths[zoneID] = -amount; // Start negative if tracking damage, or assume max? 
+                // Let's assume zones start at 0 damage taken or 100 health. 
+                // Simplified: Start at 100 on first hit? Or just accumulate damage?
+                // Request implies "body zone value updates", let's assume it tracks REMAINING health.
+                // But we didn't init it. Let's assume we init on first hit to "Max - amount".
+                // Better: Just track damage taken if we don't have max per zone defined.
+                // Re-reading: "body zone value updates". 
+                // Let's set a default max if not present? Or just subtract.
+                // For simplicity: We track *Health*. If missing, init to 100.
+                vehicleRuntimeData.zoneHealths[zoneID] = 100f - amount;
+            }
+
+            Debug.Log($"[VehicleState] Zone {zoneID} hit. Value: {vehicleRuntimeData.zoneHealths[zoneID]}");
+
+            // 2. Apply Overall Damage
+            ApplyDamage(amount);
+
+            // 3. Notify
+            OnVehicleZoneDamaged?.Invoke();
+        }
+
         public void SetOccupied(bool occupied)
         {
             _isOccupied = occupied;
