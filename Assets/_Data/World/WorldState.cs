@@ -8,13 +8,27 @@ namespace Data.World.Runtime
     public class WorldSaveData
     {
         public List<string> destroyedObjectIDs;
+        public RegionType regionType;
+        public float totalDistanceTraveled;
         // Add other persistent world state here (e.g. unlocked doors)
+    }
+
+    [Serializable]
+    public enum RegionType
+    {
+        Urban,
+        Remote,
+        Transition
     }
 
     public class WorldState : MonoBehaviour
     {
         [Header("Environment")]
         public string currentBiome;
+        public RegionType currentRegionType;
+        
+        [Header("Progression")]
+        public float worldDistanceTraveled;
         
         [Header("Persistence")]
         [Tooltip("List of unique IDs for objects destroyed by the player (Persistent)")]
@@ -26,6 +40,8 @@ namespace Data.World.Runtime
 
         // Events
         public event Action<string> OnBiomeChanged;
+        public event Action<RegionType> OnRegionChanged;
+        public event Action<float> OnDistanceUpdated;
 
         /// <summary>
         /// Updates the current biome and triggers event.
@@ -37,6 +53,25 @@ namespace Data.World.Runtime
                 currentBiome = biomeName;
                 OnBiomeChanged?.Invoke(currentBiome);
                 Debug.Log($"[WorldState] Biome changed to: {currentBiome}");
+            }
+        }
+
+        public void SetRegion(RegionType regionType)
+        {
+            if (currentRegionType != regionType)
+            {
+                currentRegionType = regionType;
+                OnRegionChanged?.Invoke(currentRegionType);
+                Debug.Log($"[WorldState] Region changed to: {currentRegionType}");
+            }
+        }
+
+        public void AddDistance(float amount)
+        {
+            if (amount > 0)
+            {
+                worldDistanceTraveled += amount;
+                OnDistanceUpdated?.Invoke(worldDistanceTraveled);
             }
         }
 
@@ -91,6 +126,8 @@ namespace Data.World.Runtime
         {
             WorldSaveData data = new WorldSaveData();
             data.destroyedObjectIDs = new List<string>(destroyedObjectIDs);
+            data.regionType = currentRegionType;
+            data.totalDistanceTraveled = worldDistanceTraveled;
             return data;
         }
 
@@ -106,6 +143,9 @@ namespace Data.World.Runtime
             {
                 destroyedObjectIDs.AddRange(data.destroyedObjectIDs);
             }
+            
+            currentRegionType = data.regionType;
+            worldDistanceTraveled = data.totalDistanceTraveled;
         }
     }
 }

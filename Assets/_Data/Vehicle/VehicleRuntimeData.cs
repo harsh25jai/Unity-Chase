@@ -21,9 +21,19 @@ namespace Data.Vehicle.Runtime
     }
 
     [Serializable]
+    public enum VehicleDegradationState
+    {
+        Operational,
+        Degraded,
+        Critical,
+        Disabled
+    }
+
+    [Serializable]
     public class VehicleSaveData
     {
         public string vehicleID;
+        public VehicleDegradationState degradationState;
         public List<VehicleUpgrade> upgrades;
         public bool isUnlocked;
     }
@@ -33,6 +43,9 @@ namespace Data.Vehicle.Runtime
         [Header("Identity")]
         public string vehicleID;
         public string ownerPlayerID;
+
+        [Header("State")]
+        public VehicleDegradationState currentDegradationState;
 
         [Header("Status")]
         public float currentHealth;
@@ -93,6 +106,9 @@ namespace Data.Vehicle.Runtime
         /// </summary>
         public void ResetOnDestruction()
         {
+            // Reset State
+            currentDegradationState = VehicleDegradationState.Operational;
+
             currentHealth = maxHealth;
             currentFuel = maxFuel;
             
@@ -114,6 +130,7 @@ namespace Data.Vehicle.Runtime
         {
             VehicleSaveData data = new VehicleSaveData();
             data.vehicleID = vehicleID;
+            data.degradationState = currentDegradationState;
             data.isUnlocked = isUnlocked;
             data.upgrades = new List<VehicleUpgrade>(upgrades); // Copy upgrades
             return data;
@@ -130,6 +147,7 @@ namespace Data.Vehicle.Runtime
             // vehicleID = data.vehicleID; 
 
             isUnlocked = data.isUnlocked;
+            currentDegradationState = data.degradationState;
             
             // Restore upgrades
             upgrades.Clear();

@@ -22,9 +22,19 @@ namespace Data.Player.Runtime
     }
 
     [Serializable]
+    public enum SurvivalState
+    {
+        Alive,
+        Incapacitated,
+        Dead,
+        Busted
+    }
+
+    [Serializable]
     public class PlayerSaveData
     {
         public string playerID;
+        public SurvivalState survivalState;
         public int experiencePoints;
         public List<InventoryItem> persistentInventory;
         // Add other persistent fields as needed
@@ -34,6 +44,9 @@ namespace Data.Player.Runtime
     {
         [Header("Identity")]
         public string playerID;
+
+        [Header("Survival State")]
+        public SurvivalState currentSurvivalState;
 
         [Header("Health & Status")]
         [Tooltip("Current Health Points")]
@@ -88,6 +101,9 @@ namespace Data.Player.Runtime
         /// </summary>
         public void ResetOnDeath()
         {
+            // Reset Survival State
+            currentSurvivalState = SurvivalState.Alive;
+
             // Reset Vitals
             currentHealth = maxHealth;
             currentStamina = maxStamina;
@@ -116,6 +132,7 @@ namespace Data.Player.Runtime
             if (data == null) return;
 
             playerID = data.playerID;
+            currentSurvivalState = data.survivalState; // Restore state (though usually loaded as Alive unless persistent death)
             experiencePoints = data.experiencePoints;
             
             // Merge or replace inventory
@@ -144,6 +161,7 @@ namespace Data.Player.Runtime
         {
             var data = new PlayerSaveData();
             data.playerID = playerID;
+            data.survivalState = currentSurvivalState;
             data.experiencePoints = experiencePoints;
             
             // Filter persistent inventory

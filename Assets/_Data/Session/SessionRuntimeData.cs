@@ -5,6 +5,23 @@ using UnityEngine;
 namespace Data.Session.Runtime
 {
     [Serializable]
+    public enum WantedLevel
+    {
+        None,
+        LowAlert,
+        ActivePursuit,
+        HighIntensity
+    }
+
+    [Serializable]
+    public enum SessionState
+    {
+        Active,
+        Ended,
+        Restarting
+    }
+
+    [Serializable]
     public class SessionSaveData
     {
         public List<string> completedCheckpoints;
@@ -23,6 +40,12 @@ namespace Data.Session.Runtime
         [Tooltip("Global threat/intensity level (0-100)")]
         [Range(0f, 100f)]
         public float globalThreatLevel;
+
+        [Tooltip("Current Wanted Level")]
+        public WantedLevel currentWantedLevel;
+
+        [Header("State")]
+        public SessionState currentSessionState;
 
         [Header("Persistence")]
         public List<string> completedCheckpoints = new List<string>();
@@ -81,6 +104,8 @@ namespace Data.Session.Runtime
         {
             sessionTimer = 0f;
             globalThreatLevel = 0f;
+            currentWantedLevel = WantedLevel.None;
+            currentSessionState = SessionState.Active;
             
             // Note: We do usually keep completedCheckpoints on death if they act as respawn points.
             // If the game is "Roguelike" and wipes progress, clear them here. 
