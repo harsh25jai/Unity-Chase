@@ -352,8 +352,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372129623}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0034167755, y: 0.025952978, z: -0.13048153, w: 0.99110514}
-  m_LocalPosition: {x: 0, y: 6, z: 12}
+  m_LocalRotation: {x: 0, y: 0.98768836, z: -0.1564345, w: 0}
+  m_LocalPosition: {x: 0, y: 9, z: 22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -566,6 +566,7 @@ Transform:
   m_Children:
   - {fileID: 975935810}
   - {fileID: 1120929187}
+  - {fileID: 1628098868}
   m_Father: {fileID: 1583058495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &803453263
@@ -1078,6 +1079,37 @@ Transform:
   - {fileID: 1812071332}
   m_Father: {fileID: 1998095540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1628098867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1628098868}
+  m_Layer: 0
+  m_Name: LookTarget_BankCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1628098868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628098867}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6, z: -18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 781113501}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1693998157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,13 +1135,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693998157}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0034167755, y: 0.025952978, z: -0.13048153, w: 0.99110514}
-  m_LocalPosition: {x: 0, y: 6, z: 12}
+  m_LocalRotation: {x: 0, y: 0.98768836, z: -0.1564345, w: 0}
+  m_LocalPosition: {x: 0, y: 9, z: 22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1583058495}
-  m_LocalEulerAnglesHint: {x: 0, y: 3, z: -15}
+  m_LocalEulerAnglesHint: {x: 18, y: 180, z: 0}
 --- !u!114 &1693998159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,14 +1159,14 @@ MonoBehaviour:
     m_Value: 20
   OutputChannel: 1
   StandbyUpdate: 2
-  m_StreamingVersion: 0
+  m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
     TrackingTarget: {fileID: 0}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 40
+    FieldOfView: 60
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -1178,13 +1210,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812071331}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.9990483, z: -0.043619405, w: 0}
   m_LocalPosition: {x: 0, y: 2.2, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1583058495}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 180, z: 0}
 --- !u!114 &1812071333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,7 +1241,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 45
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
