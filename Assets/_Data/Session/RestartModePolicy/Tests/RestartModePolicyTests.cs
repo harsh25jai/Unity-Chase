@@ -44,7 +44,7 @@ namespace Data.Session.Runtime.Tests
             else
                 Debug.LogError("[FAIL] Policy returned true for RestartFromBeginning!");
 
-            Object.Destroy(policy);
+            UnityEngine.Object.Destroy(policy);
             yield return null;
         }
 
@@ -71,7 +71,7 @@ namespace Data.Session.Runtime.Tests
             else
                 Debug.LogError("[FAIL] Override failed when it should have been allowed!");
 
-            Object.Destroy(policy);
+            UnityEngine.Object.Destroy(policy);
             yield return null;
         }
 
@@ -90,7 +90,7 @@ namespace Data.Session.Runtime.Tests
             else
                 Debug.LogError("[FAIL] Policy failed to reset!");
 
-            Object.Destroy(policy);
+            UnityEngine.Object.Destroy(policy);
             yield return null;
         }
     }
