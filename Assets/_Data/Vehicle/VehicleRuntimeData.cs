@@ -44,6 +44,10 @@ namespace Data.Vehicle.Runtime
         public string vehicleID;
         public string ownerPlayerID;
 
+        [Header("Occupancy")]
+        public string driverPlayerID;
+        public bool isOccupied => !string.IsNullOrEmpty(driverPlayerID);
+
         [Header("State")]
         public VehicleDegradationState currentDegradationState;
 
@@ -52,6 +56,10 @@ namespace Data.Vehicle.Runtime
         public float maxHealth = 1000f;
         public float currentFuel;
         public float maxFuel = 100f;
+
+        [Header("Detailed Integrity")]
+        public float engineHealth = 1000f;
+        public List<string> tiresFlags = new List<string>();
 
         [Header("Physics State")]
         public Vector3 currentPosition;

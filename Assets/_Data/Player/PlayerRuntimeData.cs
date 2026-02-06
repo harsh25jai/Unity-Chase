@@ -14,6 +14,13 @@ namespace Data.Player.Runtime
     }
 
     [Serializable]
+    public struct SurvivalNeeds
+    {
+        public float hunger;
+        public float thirst;
+    }
+
+    [Serializable]
     public class RuntimeBuff
     {
         public string buffID;
@@ -61,9 +68,17 @@ namespace Data.Player.Runtime
         public float currentShield;
         public float maxShield = 50f;
 
+        [Header("Vitals & Economy")]
+        public SurvivalNeeds survivalNeeds;
+        public float money;
+
         [Header("Position & Rotation")]
         public Vector3 currentPosition;
         public Quaternion currentRotation;
+
+        [Header("Vehicle Interaction")]
+        public bool isInVehicle;
+        public string currentVehicleID;
 
         [Header("Inventory & Progression")]
         public int experiencePoints;

@@ -14,8 +14,16 @@ namespace Data.Session.Runtime
     }
 
     [Serializable]
+    public enum GameMode
+    {
+        SinglePlayer,
+        MultiPlayer
+    }
+
+    [Serializable]
     public enum SessionState
     {
+        Booting, // Added for Bootstrap flow
         Active,
         Ended,
         Restarting
@@ -30,6 +38,12 @@ namespace Data.Session.Runtime
 
     public class SessionRuntimeData : MonoBehaviour
     {
+        [Header("Configuration")]
+        public GameMode gameMode = GameMode.SinglePlayer;
+        public int playerCount = 1;
+        public bool isSessionActive;
+        public bool isPursuitActive;
+
         [Header("Time & Progress")]
         public float sessionTimer;
         
@@ -45,12 +59,13 @@ namespace Data.Session.Runtime
         public WantedLevel currentWantedLevel;
 
         [Header("State")]
-        public SessionState currentSessionState;
+        public SessionState currentSessionState = SessionState.Booting;
 
         [Header("Persistence")]
         public List<string> completedCheckpoints = new List<string>();
 
         // Events
+        // public event Action<GameMode, int> OnSessionInitialized;
         public event Action<string> OnCheckpointCompleted;
         public event Action<float> OnThreatLevelChanged;
 
