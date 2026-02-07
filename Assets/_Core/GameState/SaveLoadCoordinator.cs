@@ -21,6 +21,7 @@ namespace Core.GameState
         public CheckpointSaveOrchestrator saveOrchestrator;
         public CheckpointLoadOrchestrator loadOrchestrator;
         public SessionRuntimeData sessionData;
+        public ChaseSaveBlockGate saveBlockGate;
 
         [Header("Runtime State")]
         public CoordinatorState currentState = CoordinatorState.Idle;
@@ -41,6 +42,7 @@ namespace Core.GameState
             if (saveOrchestrator == null) saveOrchestrator = FindFirstObjectByType<CheckpointSaveOrchestrator>();
             if (loadOrchestrator == null) loadOrchestrator = FindFirstObjectByType<CheckpointLoadOrchestrator>();
             if (sessionData == null) sessionData = FindFirstObjectByType<SessionRuntimeData>();
+            if (saveBlockGate == null) saveBlockGate = FindFirstObjectByType<ChaseSaveBlockGate>();
         }
 
         private void OnEnable()
@@ -62,9 +64,16 @@ namespace Core.GameState
             }
 
             // Policy Gating
-            if (sessionData != null && sessionData.isPursuitActive)
+            if (saveBlockGate != null && !saveBlockGate.IsSaveAllowed())
             {
-                Debug.Log("[SaveLoadCoordinator] Save blocked by policy: Active Pursuit.");
+                Debug.Log("[SaveLoadCoordinator] Save blocked by ChaseSaveBlockGate policy.");
+                OnSaveFailed?.Invoke(slot, checkpointId, "BlockedByPolicy");
+                return;
+            }
+            else if (saveBlockGate == null && sessionData != null && sessionData.isPursuitActive)
+            {
+                // Fallback if gate is missing but session data exists
+                Debug.Log("[SaveLoadCoordinator] Save blocked by legacy session policy: Active Pursuit.");
                 OnSaveFailed?.Invoke(slot, checkpointId, "BlockedByPolicy");
                 return;
             }
