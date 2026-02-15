@@ -24,6 +24,8 @@ namespace Data.Session.Runtime
     public enum SessionState
     {
         Booting, // Added for Bootstrap flow
+        CutsceneMode,
+        TransitionMode,
         Active,
         Ended,
         Restarting
@@ -60,6 +62,9 @@ namespace Data.Session.Runtime
 
         [Header("State")]
         public SessionState currentSessionState = SessionState.Booting;
+
+        [Header("Handoff")]
+        public HandoffTransitionData activeHandoffData;
 
         [Header("Persistence")]
         public List<string> completedCheckpoints = new List<string>();

@@ -101,6 +101,22 @@ namespace Systems.Player
             }
         }
 
+        /// <summary>
+        /// Teleports player to a specific position/rotation and sets initial state.
+        /// </summary>
+        public void SpawnAtPosition(Vector3 position, Quaternion rotation, string initialState)
+        {
+            transform.position = position;
+            transform.rotation = rotation;
+            
+            Debug.Log($"[PlayerState] Teleported to {position}. Initial State: {initialState}");
+
+            if (initialState == "TransitionHold")
+            {
+                SetControlLock(true);
+            }
+        }
+
         public void SetControlLock(bool locked)
         {
             _isControlLocked = locked;
