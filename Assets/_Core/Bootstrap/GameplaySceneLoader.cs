@@ -24,6 +24,8 @@ namespace Core.Bootstrap
         public SessionRuntimeData sessionData;
         public TransitionUIController uiController;
 
+        public static HandoffTransitionData cachedHandoffData;
+
         private void Awake()
         {
             if (Instance == null)
@@ -57,6 +59,7 @@ namespace Core.Bootstrap
             {
                 sessionData.activeHandoffData = handoffData;
             }
+            cachedHandoffData = handoffData;
 
             // 2. Start Transition Sequence
             StartCoroutine(TransitionSequence());

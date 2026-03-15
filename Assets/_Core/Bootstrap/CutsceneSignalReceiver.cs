@@ -33,6 +33,7 @@ namespace Core.Bootstrap
         public GameplaySceneLoader sceneLoader;
         public PlayerStateController playerStateController;
 
+        public static bool hasReceivedSignal = false;
         private bool _signalProcessed = false;
 
         private void OnEnable()
@@ -68,6 +69,7 @@ namespace Core.Bootstrap
             }
 
             _signalProcessed = true;
+            hasReceivedSignal = true;
             Debug.Log($"[CutsceneSignalReceiver] Signal '{targetSignal}' received.");
 
             // 1. Validate Timing
