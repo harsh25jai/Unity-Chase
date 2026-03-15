@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_World/Scenes/Bootstrap.unity
     guid: 7be37deb4e4f8744196eb77b6ca25171
+  - enabled: 1
+    path: Assets/_World/Scenes/BankPrologue_Timeline.unity
+    guid: eca61a9dcae66bc4c9fbdcf33f0a380b
+  - enabled: 1
+    path: Assets/_World/Scenes/EscapeStart.unity
+    guid: cce0f2cbd4e489e468eb712c30890102
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

@@ -157,6 +157,7 @@ Transform:
   - {fileID: 968102062}
   - {fileID: 1197589792}
   - {fileID: 660159069}
+  - {fileID: 1718497574}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &39609757
@@ -992,7 +993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &251877754
 Transform:
   m_ObjectHideFlags: 0
@@ -3935,6 +3936,66 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1718497573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1718497574}
+  - component: {fileID: 1718497576}
+  - component: {fileID: 1718497575}
+  m_Layer: 0
+  m_Name: CutsceneSignalRelay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1718497574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718497573}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 29806300}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1718497575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718497573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals: []
+    m_Events: []
+--- !u!114 &1718497576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718497573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77c94ca2adedd243b74d591166635a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Core.Bootstrap.CutsceneSignalRelay
 --- !u!1 &1763501268
 GameObject:
   m_ObjectHideFlags: 0
@@ -4610,6 +4671,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2093363457}
   - component: {fileID: 2093363458}
+  - component: {fileID: 2093363459}
+  - component: {fileID: 2093363461}
+  - component: {fileID: 2093363460}
   m_Layer: 0
   m_Name: Director_RobberyIntro
   m_TagString: Untagged
@@ -4653,6 +4717,8 @@ PlayableDirector:
     value: {fileID: 660159068}
   - key: {fileID: 3052773526105047595, guid: c9b376a15ef4288429b99662e85bdff1, type: 2}
     value: {fileID: 0}
+  - key: {fileID: 3585855860098150110, guid: c9b376a15ef4288429b99662e85bdff1, type: 2}
+    value: {fileID: 2093363461}
   m_ExposedReferences:
     m_References:
     - 93bcd7f600f567141858b6551b62aa90: {fileID: 1922028224}
@@ -4667,6 +4733,70 @@ PlayableDirector:
     - 52bcca7a970b8b04faa37d6ab4d01270: {fileID: 210439289}
     - ea22651710a11d7428523f3d84db989f: {fileID: 1014452906}
     - 8eaa38caa9e8b534285ebcf613a5251b: {fileID: 54172623}
+--- !u!114 &2093363459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093363456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f5f5706926a14b4598296d0763b2aa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Core.Bootstrap.CutsceneSignalReceiver
+  targetSignal: SIG_Cutscene_RobberyIntro_End
+  expectedSignalTime: 25.8
+  timingTolerance: 0.2
+  anchorPath: Cutscene_Root/Markers/Handoff_Anchor
+  playerFacingPath: Cutscene_Root/Markers/Handoff_PlayerFacing
+  lookTargetPath: Cutscene_Root/Markers/Handoff_LookTarget
+  gameStateManager: {fileID: 0}
+  sceneLoader: {fileID: 0}
+  playerStateController: {fileID: 0}
+--- !u!114 &2093363460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093363456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf7ca17c33bb1014e96bdf52942f9b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EscapeGame.Cutscenes.SceneTransitionTrigger
+--- !u!114 &2093363461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093363456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: cf8be711e15827b4ab3df350551a08b2, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2093363460}
+          m_TargetAssemblyTypeName: EscapeGame.Cutscenes.SceneTransitionTrigger,
+            Assembly-CSharp
+          m_MethodName: LoadEscapeStart
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2112443240
 GameObject:
   m_ObjectHideFlags: 0
