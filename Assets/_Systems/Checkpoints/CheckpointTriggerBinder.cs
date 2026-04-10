@@ -123,7 +123,6 @@ namespace Systems.Checkpoints
             // But usually, the binder would attach a proxy or listen to the trigger.
             // For simplicity in this logic-centric slice, we assume something forwards it 
             // OR the binder is on the trigger (if auto-discovery puts it there).
-            
             // Heuristic: If we are Armed, we accept triggers.
             if (currentState != BinderState.Armed) return;
 

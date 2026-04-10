@@ -1,0 +1,23 @@
+{
+    "modelContext.servers": {
+        "devcontext": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "devcontext@latest"
+            ],
+            "enabled": true,
+            "env": {
+                "TURSO_DATABASE_URL": "libsql://devcontext-asus.aws-ap-south-1.turso.io",
+                "TURSO_AUTH_TOKEN": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzQ5MjkyNzksImlkIjoiMDE5ZDQyMDYtZDAwMS03NjMzLTliNzMtOWJjYTk0NjhmOTcxIiwicmlkIjoiMTk2OTc1NjQtMTkxYS00ZmI2LWIyNjUtYTYxMDM1MmE4ODQxIn0.twwF5r6NrtK-c9VlVyHfbLy6EoBGiP2uMBvjjjXf1fOS-QsjCWvru1xSMDTqVu2M3L7RBlN4phPFsaJDmb90DA"
+            }
+        }
+    },
+    "unityMCP": {
+        "type": "sse",
+        "serverUrl": "http://127.0.0.1:18008/mcp",
+        "disabled": false,
+        "alwaysAllow": [],
+        "disabledTools": []
+    }
+}
