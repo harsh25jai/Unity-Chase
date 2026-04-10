@@ -1,0 +1,11 @@
+---
+description: Applies to all C# Unity scripts within the Chase project to maintain architecture and testing standards.
+globs: ["*.cs"]
+---
+# Unity C# Implementation Standards
+
+- **DO NOT** use monolithic `Update()` loops for state checking. Rely on event callbacks, Signals, or explicit Binders.
+- **DO NOT** use `GameObject.Find()` or `Object.FindObjectOfType()`. Inject dependencies through the Inspector using Resolver or Binder components.
+- **MUST** put scripts into `_Core` if they belong to lifecycle, infrastructure, or foundational execution.
+- **MUST** put scripts into `_Systems` if they are encapsulating specific game mechanics or domain logic.
+- **MUST** include corresponding tests in a `Tests/` folder within the same system module whenever creating a Controller, Orchestrator, or Gate.
