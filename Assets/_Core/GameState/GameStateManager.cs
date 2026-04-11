@@ -62,8 +62,6 @@ namespace Core.GameState
 
             Debug.Log($"[GameState] Session Ended. Reason: {reason}");
             SetState(SessionState.Ended);
-            Debug.Log($"[GameState] Session Ended. Reason: {reason}");
-            SetState(SessionState.Ended);
             OnSessionEnded?.Invoke();
 
             if (reason == "Death") OnGameOver?.Invoke();
